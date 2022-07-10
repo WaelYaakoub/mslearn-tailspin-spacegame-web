@@ -1,16 +1,10 @@
-# ASP.NET Core
-# Build and test ASP.NET Core projects targeting .NET Core.
-# Add steps that run tests, create a NuGet package, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
 trigger:
   - '*' 
-
 pool:
     vmImage: 'ubuntu-20.04'
     demands:
     - npm
-
+  
 variables:
     buildConfiguration: 'Release'
     wwwrootDir: 'Tailspin.SpaceGame.Web/wwwroot'
@@ -46,16 +40,11 @@ steps:
   - template: templates/build.yml
     parameters:
       buildConfiguration: 'Debug'
-    
+  
   - template: templates/build.yml
     parameters:
-        buildConfiguration: 'Release'
+      buildConfiguration: 'Release'
   
   - task: PublishBuildArtifacts@1
     displayName: 'Publish Artifact: drop'
     condition: succeeded()
-
-  
-
-
- 
